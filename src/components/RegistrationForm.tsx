@@ -51,8 +51,7 @@ export default function RegistrationForm({
     setForm((prev) => {
       if (type === "checkbox") {
         if (name === "demande_bourse") {
-          // Bourse cochée -> nombre_bourses = 0 (plus utilisé)
-          return { ...prev, demande_bourse: checked, nombre_bourses: 0 };
+          return { ...prev, demande_bourse: checked, nombre_bourses: checked ? 1 : 0 };
         }
         if (name === "certifications") {
           const updated = checked
@@ -60,6 +59,9 @@ export default function RegistrationForm({
             : prev.certifications.filter((c) => c !== value);
           return { ...prev, certifications: updated };
         }
+      }
+      if (name === "nombre_bourses") {
+        return { ...prev, nombre_bourses: Number(value) };
       }
       return { ...prev, [name]: value };
     });
@@ -74,7 +76,6 @@ export default function RegistrationForm({
       return;
     }
 
-    // Calcul simple : tarif bourse ou non
     let total = 0;
     form.certifications.forEach((cert) => {
       if (certificationsJuridiques.includes(cert)) {
@@ -95,7 +96,7 @@ export default function RegistrationForm({
         qualite: form.qualite,
         certifications: form.certifications,
         demande_bourse: form.demande_bourse,
-        nombre_bourses: form.demande_bourse ? form.certifications.length : 0, // stocke le nombre de certifications boursières (info utile)
+        nombre_bourses: form.demande_bourse ? form.nombre_bourses : 0,
         justification_bourse: "",
         montant_total: total,
       },
@@ -227,7 +228,7 @@ export default function RegistrationForm({
         </div>
       </fieldset>
 
-      {/* BLOC BOURSE SIMPLIFIÉ */}
+      {/* BLOC BOURSE MIS EN AVANT */}
       <div className="bg-[#D4AF37]/10 border-2 border-[#D4AF37] rounded-2xl p-5 space-y-4">
         <div className="flex items-center gap-3">
           <Award className="w-6 h-6 text-[#D4AF37]" />
@@ -236,11 +237,12 @@ export default function RegistrationForm({
               Bourse Mamadou TOURÉ
             </span>
             <p className="text-gray-300 text-sm">
-              Réduction exceptionnelle sur toutes vos certifications. Places limitées.
+              Réduction exceptionnelle pour les plus motivés. Places limitées.
             </p>
           </div>
         </div>
 
+        {/* Case à cocher personnalisée */}
         <label className="flex items-center gap-3 cursor-pointer">
           <input
             type="checkbox"
@@ -275,7 +277,23 @@ export default function RegistrationForm({
             Oui, je veux bénéficier de la Bourse *
           </span>
         </label>
-        {/* Plus de champ "nombre de bourses" */}
+
+        {form.demande_bourse && (
+          <div className="pl-4 border-l-2 border-[#D4AF37]/30">
+            <label className="block text-sm text-gray-300 mb-1">
+              Pour combien de certifications sollicitez-vous la bourse ? *
+            </label>
+            <input
+              type="number"
+              name="nombre_bourses"
+              min={1}
+              max={form.certifications.length || 1}
+              value={form.nombre_bourses}
+              onChange={handleChange}
+              className="w-24 bg-[#0B0F19] border border-[#1E293B] rounded-lg px-4 py-2 text-white"
+            />
+          </div>
+        )}
       </div>
 
       {error && (
