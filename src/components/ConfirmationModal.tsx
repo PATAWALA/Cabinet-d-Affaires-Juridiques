@@ -42,16 +42,16 @@ export default function ConfirmationModal({
         <CheckCircle className="w-16 h-16 text-[#D4AF37] mx-auto mb-6" />
 
         <h2 className="font-heading text-2xl font-bold text-white mb-4">
-          Candidature enregistrée avec succès !
+          Félicitations, votre avenir commence maintenant !
         </h2>
         <p className="text-gray-300 mb-6">
-          Le Cabinet d’Affaires Juridiques va étudier votre dossier. Un conseiller vous contactera très rapidement par WhatsApp.
+          Votre candidature a bien été reçue. Un conseiller du Cabinet Dr Lobé vous contactera très rapidement par WhatsApp pour finaliser votre inscription et confirmer votre bourse.
         </p>
 
         <div className="flex flex-col gap-3">
           <a
-            href={`https://wa.me/2250000000000?text=${encodeURIComponent(
-              "Bonjour, je viens de m’inscrire aux certifications du Cabinet d’Affaires Juridiques et je souhaite un suivi personnalisé."
+            href={`https://wa.me/2250757279676?text=${encodeURIComponent(
+              "Bonjour, je viens de m’inscrire aux certifications internationales du Cabinet Dr Lobé. Je souhaite confirmer ma bourse Mamadou TOURÉ."
             )}`}
             target="_blank"
             rel="noopener noreferrer"

@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import Hero from "@/components/Hero";
-import Certifications from "@/components/Certifications";
+import StorySection from "@/components/StorySection";
+import ProgramsSection from "@/components/ProgramsSection";
 import RegistrationForm from "@/components/RegistrationForm";
 import ConfirmationModal from "@/components/ConfirmationModal";
-import { ArrowUpRight, GraduationCap } from "lucide-react";
+import { GraduationCap, ArrowUpRight } from "lucide-react";
 
-export default function LandingPage() {
+export default function LandingPageClient() {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
@@ -31,7 +32,7 @@ export default function LandingPage() {
             href="#inscription"
             className="bg-[#D4AF37] hover:bg-[#C5A028] text-[#0B0F19] font-bold px-6 py-2 rounded-full flex items-center gap-2"
           >
-            Postuler à la Bourse
+            Débloquer ma carrière
             <ArrowUpRight className="w-4 h-4" />
           </a>
         </nav>
@@ -39,30 +40,11 @@ export default function LandingPage() {
 
       <main>
         <Hero />
-        <Certifications />
-
-        {/* Preuve sociale rapide */}
-        <section className="py-16 px-4 bg-[#0B0F19]">
-          <div className="max-w-4xl mx-auto grid sm:grid-cols-3 gap-8 text-center">
-            <div>
-              <div className="text-3xl font-bold text-[#D4AF37]">15+</div>
-              <div className="text-gray-400 text-sm">années d’expertise</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-[#D4AF37]">+5000</div>
-              <div className="text-gray-400 text-sm">professionnels certifiés</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-[#D4AF37]">100%</div>
-              <div className="text-gray-400 text-sm">reconnaissance internationale</div>
-            </div>
-          </div>
-        </section>
+        <StorySection />
+        <ProgramsSection />
 
         <section className="py-24 px-4" id="inscription">
-          <div className="max-w-6xl mx-auto">
-            <RegistrationForm onSuccess={() => setModalOpen(true)} />
-          </div>
+          <RegistrationForm onSuccess={() => setModalOpen(true)} />
         </section>
 
         {/* Sticky Button Mobile */}
@@ -71,7 +53,7 @@ export default function LandingPage() {
             href="#inscription"
             className="block w-full bg-[#D4AF37] hover:bg-[#C5A028] text-[#0B0F19] font-bold text-center py-4 rounded-xl shadow-2xl shadow-[#D4AF37]/30 text-lg"
           >
-            Postuler à la Bourse – Places limitées
+            Je débloque ma bourse – Je m’inscris
           </a>
         </div>
       </main>
