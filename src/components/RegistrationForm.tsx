@@ -22,7 +22,6 @@ const certificationsImmobilieres = [
 
 const allCertifications = [...certificationsJuridiques, ...certificationsImmobilieres];
 
-// Liste des pays francophones avec leurs indicatifs
 const countries = [
   { code: "+225", name: "Côte d'Ivoire" },
   { code: "+33", name: "France" },
@@ -68,7 +67,7 @@ export default function RegistrationForm({
     nombre_bourses: 0,
     justification_bourse: "",
   });
-  const [countryCode, setCountryCode] = useState("+225"); // Par défaut Côte d'Ivoire
+  const [countryCode, setCountryCode] = useState("+225");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -91,7 +90,6 @@ export default function RegistrationForm({
         }
       }
       if (name === "whatsapp") {
-        // Nettoyer pour ne garder que les chiffres
         const cleaned = value.replace(/\D/g, "");
         return { ...prev, whatsapp: cleaned };
       }
@@ -108,7 +106,6 @@ export default function RegistrationForm({
       return;
     }
 
-    // Numéro complet avec l'indicatif pays
     const fullWhatsapp = countryCode + form.whatsapp;
 
     let total = 0;
@@ -126,7 +123,7 @@ export default function RegistrationForm({
         nom: form.nom,
         prenom: form.prenom,
         email: form.email,
-        whatsapp: fullWhatsapp, // Numéro complet
+        whatsapp: fullWhatsapp,
         ville: form.ville,
         qualite: form.qualite,
         certifications: form.certifications,
@@ -200,33 +197,31 @@ export default function RegistrationForm({
         <div>
           <label className="block text-sm text-gray-300 mb-1">Numéro WhatsApp *</label>
           <div className="flex items-stretch bg-[#0B0F19] border border-[#1E293B] rounded-lg overflow-hidden focus-within:border-[#D4AF37]">
-            {/* Sélecteur de pays */}
             <div className="relative flex items-center border-r border-[#1E293B]">
               <select
                 value={countryCode}
                 onChange={(e) => setCountryCode(e.target.value)}
-                className="appearance-none bg-transparent text-white pl-3 pr-8 py-2 text-sm focus:outline-none cursor-pointer"
+                className="appearance-none bg-transparent text-white pl-3 pr-7 py-2 text-sm focus:outline-none cursor-pointer w-16 md:w-20"
               >
                 {countries.map((country) => (
-                  <option key={country.code} value={country.code}>
-                    {country.code} {country.name}
+                  <option key={country.code} value={country.code} className="text-gray-900">
+                    {country.code}
                   </option>
                 ))}
               </select>
-              <ChevronDown className="absolute right-1 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+              <ChevronDown className="absolute right-1 top-1/2 -translate-y-1/2 w-3 h-3 text-gray-400 pointer-events-none" />
             </div>
-            {/* Champ numéro local */}
             <input
               name="whatsapp"
               required
               value={form.whatsapp}
               onChange={handleChange}
               placeholder="07 57 27 96 76"
-              className="flex-1 bg-transparent px-4 py-2 text-white placeholder-gray-500 focus:outline-none"
+              className="flex-1 min-w-0 bg-transparent px-4 py-2 text-white placeholder-gray-500 focus:outline-none"
             />
           </div>
           <p className="text-xs text-gray-500 mt-1">
-            Sélectionnez votre pays et saisissez votre numéro sans le 0 initial.
+            Sélectionnez votre pays et saisissez votre numéro local.
           </p>
         </div>
       </div>
@@ -298,7 +293,6 @@ export default function RegistrationForm({
           </div>
         </div>
 
-        {/* Case à cocher personnalisée */}
         <label className="flex items-center gap-3 cursor-pointer">
           <input
             type="checkbox"
