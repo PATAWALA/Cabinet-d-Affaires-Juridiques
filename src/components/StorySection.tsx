@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { GraduationCap } from "lucide-react";
 
 const alumni = [
@@ -12,6 +13,18 @@ export default function StorySection() {
   return (
     <section className="py-24 px-4 bg-[#0B0F19]">
       <div className="max-w-5xl mx-auto text-center space-y-8">
+        {/* Photo du Dr Lobé */}
+        <div className="relative w-40 h-40 mx-auto rounded-full border-4 border-[#D4AF37] overflow-hidden shadow-[0_0_30px_rgba(212,175,55,0.3)]">
+          <Image
+            src="/images/portrait.jpg"
+            alt="Dr Jean-Louis Lobé"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 160px, 160px"
+            priority
+          />
+        </div>
+
         <GraduationCap className="w-16 h-16 text-[#D4AF37] mx-auto" />
 
         <h2 className="font-heading text-3xl md:text-4xl font-bold text-white">
