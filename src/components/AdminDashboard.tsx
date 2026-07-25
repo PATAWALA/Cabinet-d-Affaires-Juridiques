@@ -9,8 +9,10 @@ import {
   Settings,
   LogOut,
   Loader2,
+  ExternalLink,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import AdminStatsCards from "@/components/AdminStatsCards";
 import InscriptionsChart from "@/components/InscriptionsChart";
 import FiltersBar from "@/components/FiltersBar";
@@ -26,6 +28,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<"dashboard" | "inscrits" | "parametres">("dashboard");
   const [selectedCandidate, setSelectedCandidate] = useState<CandidateRecord | null>(null);
+  const [session, setSession] = useState<any>(null);
 
   // Filtres
   const [searchTerm, setSearchTerm] = useState("");
@@ -46,6 +49,10 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     fetchCandidates();
+    // Récupération de la session pour AccountSettings
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
   }, []);
 
   // Filtrage des candidats selon les critères
@@ -92,7 +99,7 @@ export default function AdminDashboard() {
     return result;
   }, [candidates, period, bourseFilter, searchTerm]);
 
-  // Fonctions de contact
+  // Fonctions de contact avec messages personnalisés
   const generateWhatsAppMessage = (c: CandidateRecord) => {
     const nbBourses = c.demande_bourse ? c.certifications.length : 0;
     const montant = c.montant_total || 0;
@@ -116,7 +123,7 @@ export default function AdminDashboard() {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    router.push("/admin");
+    router.push("/"); // Redirection vers l'accueil du site
   };
 
   if (loading) {
@@ -135,13 +142,23 @@ export default function AdminDashboard() {
           <h1 className="font-heading text-2xl font-bold">Administration</h1>
           <p className="text-gray-400 text-sm">Cabinet d'Affaires Juridiques – Dr Lobé</p>
         </div>
-        <button
-          onClick={handleLogout}
-          className="flex items-center gap-2 bg-red-900/30 border border-red-500/30 text-red-300 px-4 py-2 rounded-lg hover:bg-red-900/50 transition self-end md:self-auto"
-        >
-          <LogOut className="w-4 h-4" />
-          Déconnexion
-        </button>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/"
+            target="_blank"
+            className="flex items-center gap-2 bg-[#1E293B] hover:bg-[#2d3748] text-gray-300 px-4 py-2 rounded-lg transition text-sm"
+          >
+            <ExternalLink className="w-4 h-4" />
+            Visiter le site
+          </Link>
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-2 bg-red-900/30 border border-red-500/30 text-red-300 px-4 py-2 rounded-lg hover:bg-red-900/50 transition"
+          >
+            <LogOut className="w-4 h-4" />
+            Déconnexion
+          </button>
+        </div>
       </div>
 
       {/* Navigation par onglets */}
@@ -175,7 +192,7 @@ export default function AdminDashboard() {
         </button>
       </div>
 
-      {/* Contenu */}
+      {/* Contenu des onglets */}
       {activeTab === "dashboard" && (
         <>
           <AdminStatsCards candidates={candidates} onFilterBourse={setBourseFilter} />
@@ -201,9 +218,9 @@ export default function AdminDashboard() {
         </>
       )}
 
-      {activeTab === "parametres" && (
+      {activeTab === "parametres" && session && (
         <div className="space-y-8">
-          <AccountSettings />
+          <AccountSettings userEmail={session.user.email} />
           <ManageAdmins />
         </div>
       )}
