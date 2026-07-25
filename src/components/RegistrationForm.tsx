@@ -23,31 +23,31 @@ const certificationsImmobilieres = [
 const allCertifications = [...certificationsJuridiques, ...certificationsImmobilieres];
 
 const countries = [
-  { code: "+225", name: "Côte d'Ivoire" },
-  { code: "+33", name: "France" },
-  { code: "+221", name: "Sénégal" },
-  { code: "+237", name: "Cameroun" },
-  { code: "+223", name: "Mali" },
-  { code: "+226", name: "Burkina Faso" },
-  { code: "+227", name: "Niger" },
-  { code: "+228", name: "Togo" },
-  { code: "+229", name: "Bénin" },
-  { code: "+241", name: "Gabon" },
-  { code: "+242", name: "Congo" },
-  { code: "+243", name: "RDC" },
-  { code: "+261", name: "Madagascar" },
-  { code: "+212", name: "Maroc" },
-  { code: "+213", name: "Algérie" },
-  { code: "+216", name: "Tunisie" },
-  { code: "+222", name: "Mauritanie" },
-  { code: "+224", name: "Guinée" },
-  { code: "+235", name: "Tchad" },
-  { code: "+236", name: "Centrafrique" },
-  { code: "+253", name: "Djibouti" },
-  { code: "+269", name: "Comores" },
-  { code: "+1", name: "Canada (Québec)" },
-  { code: "+32", name: "Belgique" },
-  { code: "+41", name: "Suisse" },
+  { code: "+225", name: "Côte d'Ivoire", flag: "🇨🇮" },
+  { code: "+33", name: "France", flag: "🇫🇷" },
+  { code: "+221", name: "Sénégal", flag: "🇸🇳" },
+  { code: "+237", name: "Cameroun", flag: "🇨🇲" },
+  { code: "+223", name: "Mali", flag: "🇲🇱" },
+  { code: "+226", name: "Burkina Faso", flag: "🇧🇫" },
+  { code: "+227", name: "Niger", flag: "🇳🇪" },
+  { code: "+228", name: "Togo", flag: "🇹🇬" },
+  { code: "+229", name: "Bénin", flag: "🇧🇯" },
+  { code: "+241", name: "Gabon", flag: "🇬🇦" },
+  { code: "+242", name: "Congo", flag: "🇨🇬" },
+  { code: "+243", name: "RDC", flag: "🇨🇩" },
+  { code: "+261", name: "Madagascar", flag: "🇲🇬" },
+  { code: "+212", name: "Maroc", flag: "🇲🇦" },
+  { code: "+213", name: "Algérie", flag: "🇩🇿" },
+  { code: "+216", name: "Tunisie", flag: "🇹🇳" },
+  { code: "+222", name: "Mauritanie", flag: "🇲🇷" },
+  { code: "+224", name: "Guinée", flag: "🇬🇳" },
+  { code: "+235", name: "Tchad", flag: "🇹🇩" },
+  { code: "+236", name: "Centrafrique", flag: "🇨🇫" },
+  { code: "+253", name: "Djibouti", flag: "🇩🇯" },
+  { code: "+269", name: "Comores", flag: "🇰🇲" },
+  { code: "+1", name: "Canada (Québec)", flag: "🇨🇦" },
+  { code: "+32", name: "Belgique", flag: "🇧🇪" },
+  { code: "+41", name: "Suisse", flag: "🇨🇭" },
 ];
 
 export default function RegistrationForm({
@@ -197,19 +197,19 @@ export default function RegistrationForm({
         <div>
           <label className="block text-sm text-gray-300 mb-1">Numéro WhatsApp *</label>
           <div className="flex items-stretch bg-[#0B0F19] border border-[#1E293B] rounded-lg overflow-hidden focus-within:border-[#D4AF37]">
-            <div className="relative flex items-center border-r border-[#1E293B]">
+            <div className="relative flex items-center border-r border-[#1E293B] min-w-0">
               <select
                 value={countryCode}
                 onChange={(e) => setCountryCode(e.target.value)}
-                className="appearance-none bg-transparent text-white pl-3 pr-7 py-2 text-sm focus:outline-none cursor-pointer w-16 md:w-20"
+                className="appearance-none bg-transparent text-white pl-3 pr-8 py-2 text-sm focus:outline-none cursor-pointer max-w-[140px] truncate"
               >
                 {countries.map((country) => (
                   <option key={country.code} value={country.code} className="text-gray-900">
-                    {country.code}
+                    {country.flag} {country.name}
                   </option>
                 ))}
               </select>
-              <ChevronDown className="absolute right-1 top-1/2 -translate-y-1/2 w-3 h-3 text-gray-400 pointer-events-none" />
+              <ChevronDown className="absolute right-1.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
             </div>
             <input
               name="whatsapp"
@@ -221,7 +221,7 @@ export default function RegistrationForm({
             />
           </div>
           <p className="text-xs text-gray-500 mt-1">
-            Sélectionnez votre pays et saisissez votre numéro local.
+            Choisissez votre pays, puis saisissez votre numéro local.
           </p>
         </div>
       </div>
