@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { RegistrationFormData } from "@/types";
-import { Send, Loader2, AlertCircle, Clock } from "lucide-react";
+import { Send, Loader2, AlertCircle, Clock, Award } from "lucide-react";
 
 const certificationsJuridiques = [
   "CERTIFICATION EN REDACTION DES CONTRATS",
@@ -37,7 +37,7 @@ export default function RegistrationForm({
     certifications: [],
     demande_bourse: false,
     nombre_bourses: 0,
-    justification_bourse: "",
+    justification_bourse: "", // gardé dans le state mais non affiché
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -97,7 +97,7 @@ export default function RegistrationForm({
         certifications: form.certifications,
         demande_bourse: form.demande_bourse,
         nombre_bourses: form.demande_bourse ? form.nombre_bourses : 0,
-        justification_bourse: form.justification_bourse,
+        justification_bourse: "", // champ vide
         montant_total: total,
       },
     ]);
@@ -228,22 +228,35 @@ export default function RegistrationForm({
         </div>
       </fieldset>
 
-      <div className="flex items-center gap-3">
-        <input
-          type="checkbox"
-          name="demande_bourse"
-          checked={form.demande_bourse}
-          onChange={handleChange}
-          className="accent-[#D4AF37] w-4 h-4"
-        />
-        <label className="text-gray-200 text-sm font-medium">
-          Je souhaite bénéficier de la Bourse <strong className="text-[#D4AF37]">Mamadou TOURÉ</strong> *
-        </label>
-      </div>
-
-      {form.demande_bourse && (
-        <div className="space-y-4 pl-4 border-l-2 border-[#D4AF37]/30">
+      {/* BLOC BOURSE MIS EN AVANT */}
+      <div className="bg-[#D4AF37]/10 border-2 border-[#D4AF37] rounded-2xl p-5 space-y-4">
+        <div className="flex items-center gap-3">
+          <Award className="w-6 h-6 text-[#D4AF37]" />
           <div>
+            <span className="text-white font-bold text-lg">
+              Bourse Mamadou TOURÉ
+            </span>
+            <p className="text-gray-300 text-sm">
+              Réduction exceptionnelle pour les plus motivés. Places limitées.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <input
+            type="checkbox"
+            name="demande_bourse"
+            checked={form.demande_bourse}
+            onChange={handleChange}
+            className="accent-[#D4AF37] w-5 h-5"
+          />
+          <label className="text-white text-lg font-semibold cursor-pointer">
+            Oui, je veux bénéficier de la Bourse *
+          </label>
+        </div>
+
+        {form.demande_bourse && (
+          <div className="pl-4 border-l-2 border-[#D4AF37]/30">
             <label className="block text-sm text-gray-300 mb-1">
               Pour combien de certifications sollicitez-vous la bourse ? *
             </label>
@@ -257,20 +270,8 @@ export default function RegistrationForm({
               className="w-24 bg-[#0B0F19] border border-[#1E293B] rounded-lg px-4 py-2 text-white"
             />
           </div>
-          <div>
-            <label className="block text-sm text-gray-300 mb-1">
-              Pourquoi sollicitez-vous la bourse ? (quelques mots)
-            </label>
-            <textarea
-              name="justification_bourse"
-              rows={2}
-              value={form.justification_bourse}
-              onChange={handleChange}
-              className="w-full bg-[#0B0F19] border border-[#1E293B] rounded-lg px-4 py-2 text-white"
-            />
-          </div>
-        </div>
-      )}
+        )}
+      </div>
 
       {error && (
         <div className="flex items-center gap-2 text-red-400 bg-red-900/20 rounded-lg px-4 py-2">
