@@ -37,7 +37,7 @@ export default function RegistrationForm({
     certifications: [],
     demande_bourse: false,
     nombre_bourses: 0,
-    justification_bourse: "", // gardé dans le state mais non affiché
+    justification_bourse: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -97,7 +97,7 @@ export default function RegistrationForm({
         certifications: form.certifications,
         demande_bourse: form.demande_bourse,
         nombre_bourses: form.demande_bourse ? form.nombre_bourses : 0,
-        justification_bourse: "", // champ vide
+        justification_bourse: "",
         montant_total: total,
       },
     ]);
@@ -242,18 +242,41 @@ export default function RegistrationForm({
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        {/* Case à cocher personnalisée */}
+        <label className="flex items-center gap-3 cursor-pointer">
           <input
             type="checkbox"
             name="demande_bourse"
             checked={form.demande_bourse}
             onChange={handleChange}
-            className="accent-[#D4AF37] w-5 h-5"
+            className="hidden"
           />
-          <label className="text-white text-lg font-semibold cursor-pointer">
+          <div
+            className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-all ${
+              form.demande_bourse
+                ? "bg-[#D4AF37] border-[#D4AF37] scale-105"
+                : "border-gray-500 hover:border-gray-400"
+            }`}
+          >
+            {form.demande_bourse && (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-4 h-4 text-[#0B0F19]"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            )}
+          </div>
+          <span className="text-white text-lg font-semibold">
             Oui, je veux bénéficier de la Bourse *
-          </label>
-        </div>
+          </span>
+        </label>
 
         {form.demande_bourse && (
           <div className="pl-4 border-l-2 border-[#D4AF37]/30">
