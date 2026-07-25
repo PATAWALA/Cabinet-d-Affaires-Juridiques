@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { RegistrationFormData } from "@/types";
-import { Send, Loader2, AlertCircle, Clock, Award } from "lucide-react";
+import { Send, Loader2, AlertCircle, Clock, Award, ChevronDown } from "lucide-react";
 
 const certificationsJuridiques = [
   "CERTIFICATION EN REDACTION DES CONTRATS",
@@ -22,6 +22,35 @@ const certificationsImmobilieres = [
 
 const allCertifications = [...certificationsJuridiques, ...certificationsImmobilieres];
 
+// Liste des pays francophones avec leurs indicatifs
+const countries = [
+  { code: "+225", name: "Côte d'Ivoire" },
+  { code: "+33", name: "France" },
+  { code: "+221", name: "Sénégal" },
+  { code: "+237", name: "Cameroun" },
+  { code: "+223", name: "Mali" },
+  { code: "+226", name: "Burkina Faso" },
+  { code: "+227", name: "Niger" },
+  { code: "+228", name: "Togo" },
+  { code: "+229", name: "Bénin" },
+  { code: "+241", name: "Gabon" },
+  { code: "+242", name: "Congo" },
+  { code: "+243", name: "RDC" },
+  { code: "+261", name: "Madagascar" },
+  { code: "+212", name: "Maroc" },
+  { code: "+213", name: "Algérie" },
+  { code: "+216", name: "Tunisie" },
+  { code: "+222", name: "Mauritanie" },
+  { code: "+224", name: "Guinée" },
+  { code: "+235", name: "Tchad" },
+  { code: "+236", name: "Centrafrique" },
+  { code: "+253", name: "Djibouti" },
+  { code: "+269", name: "Comores" },
+  { code: "+1", name: "Canada (Québec)" },
+  { code: "+32", name: "Belgique" },
+  { code: "+41", name: "Suisse" },
+];
+
 export default function RegistrationForm({
   onSuccess,
 }: {
@@ -39,6 +68,7 @@ export default function RegistrationForm({
     nombre_bourses: 0,
     justification_bourse: "",
   });
+  const [countryCode, setCountryCode] = useState("+225"); // Par défaut Côte d'Ivoire
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -60,8 +90,10 @@ export default function RegistrationForm({
           return { ...prev, certifications: updated };
         }
       }
-      if (name === "nombre_bourses") {
-        return { ...prev, nombre_bourses: Number(value) };
+      if (name === "whatsapp") {
+        // Nettoyer pour ne garder que les chiffres
+        const cleaned = value.replace(/\D/g, "");
+        return { ...prev, whatsapp: cleaned };
       }
       return { ...prev, [name]: value };
     });
@@ -75,6 +107,9 @@ export default function RegistrationForm({
       setError("Veuillez sélectionner au moins une certification.");
       return;
     }
+
+    // Numéro complet avec l'indicatif pays
+    const fullWhatsapp = countryCode + form.whatsapp;
 
     let total = 0;
     form.certifications.forEach((cert) => {
@@ -91,7 +126,7 @@ export default function RegistrationForm({
         nom: form.nom,
         prenom: form.prenom,
         email: form.email,
-        whatsapp: form.whatsapp,
+        whatsapp: fullWhatsapp, // Numéro complet
         ville: form.ville,
         qualite: form.qualite,
         certifications: form.certifications,
@@ -164,14 +199,35 @@ export default function RegistrationForm({
         </div>
         <div>
           <label className="block text-sm text-gray-300 mb-1">Numéro WhatsApp *</label>
-          <input
-            name="whatsapp"
-            required
-            value={form.whatsapp}
-            onChange={handleChange}
-            placeholder="+225 07 57 27 96 76"
-            className="w-full bg-[#0B0F19] border border-[#1E293B] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#D4AF37]"
-          />
+          <div className="flex items-stretch bg-[#0B0F19] border border-[#1E293B] rounded-lg overflow-hidden focus-within:border-[#D4AF37]">
+            {/* Sélecteur de pays */}
+            <div className="relative flex items-center border-r border-[#1E293B]">
+              <select
+                value={countryCode}
+                onChange={(e) => setCountryCode(e.target.value)}
+                className="appearance-none bg-transparent text-white pl-3 pr-8 py-2 text-sm focus:outline-none cursor-pointer"
+              >
+                {countries.map((country) => (
+                  <option key={country.code} value={country.code}>
+                    {country.code} {country.name}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="absolute right-1 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+            </div>
+            {/* Champ numéro local */}
+            <input
+              name="whatsapp"
+              required
+              value={form.whatsapp}
+              onChange={handleChange}
+              placeholder="07 57 27 96 76"
+              className="flex-1 bg-transparent px-4 py-2 text-white placeholder-gray-500 focus:outline-none"
+            />
+          </div>
+          <p className="text-xs text-gray-500 mt-1">
+            Sélectionnez votre pays et saisissez votre numéro sans le 0 initial.
+          </p>
         </div>
       </div>
 
