@@ -13,22 +13,21 @@ export default function StorySection() {
   return (
     <section className="py-24 lg:py-32 px-4 bg-[#0B0F19]">
       <div className="max-w-5xl mx-auto space-y-16">
-        
         {/* Portrait + citation */}
         <div className="flex flex-col items-center text-center space-y-8">
           <div className="relative">
-            <div className="rounded-xl overflow-hidden border-2 border-[#D4AF37]/30 shadow-[0_0_30px_rgba(212,175,55,0.15)] w-56 sm:w-64">
+            <div className="rounded-xl overflow-hidden border-2 border-[#D4AF37]/30 shadow-[0_0_30px_rgba(212,175,55,0.15)] w-64 sm:w-80">
               <Image
                 src="/images/portrait.jpg"
                 alt="Dr Jean-Louis Lobé"
-                width={256}
-                height={320}
+                width={320}
+                height={400}
                 className="object-cover w-full h-full"
-                sizes="(max-width: 640px) 224px, 256px"
+                sizes="(max-width: 640px) 256px, 320px"
                 priority
               />
             </div>
-            <p className="text-[#D4AF37] font-semibold mt-4 text-base">Dr Jean-Louis Lobé</p>
+            <p className="text-[#D4AF37] font-semibold mt-5 text-base">Dr Jean-Louis Lobé</p>
           </div>
 
           <GraduationCap className="w-12 h-12 text-[#D4AF37]" />
@@ -80,7 +79,6 @@ export default function StorySection() {
             <div className="text-gray-300 mt-2">De satisfaction et de transformation</div>
           </div>
         </div>
-
       </div>
     </section>
   );
