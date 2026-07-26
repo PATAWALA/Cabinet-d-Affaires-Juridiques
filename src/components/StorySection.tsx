@@ -12,7 +12,7 @@ const alumni = [
 export default function StorySection() {
   return (
     <section className="py-24 lg:py-32 px-4 bg-[#0B0F19]">
-      <div className="max-w-5xl mx-auto space-y-16 text-center">
+      <div className="max-w-6xl mx-auto space-y-16 text-center">
         {/* Portrait + citation */}
         <div className="flex flex-col items-center space-y-8">
           <div className="relative">
@@ -38,7 +38,7 @@ export default function StorySection() {
         </div>
 
         {/* Texte narratif */}
-        <div className="text-gray-300 text-lg leading-loose space-y-6 max-w-3xl mx-auto">
+        <div className="text-gray-300 text-lg leading-loose space-y-6 max-w-4xl mx-auto">
           <p>
             <span className="text-[#D4AF37] font-semibold">Dr Lobé</span> a bâti{" "}
             <strong>LA PRATIQUE DU DROIT</strong> pour combler le vide entre l’université et le monde professionnel.
@@ -64,8 +64,8 @@ export default function StorySection() {
           </p>
         </div>
 
-        {/* Chiffres marquants */}
-        <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+        {/* Chiffres marquants – maintenant sur toute la largeur avec plus d’espace */}
+        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           <div className="bg-[#0f172a] border border-[#1E293B] rounded-xl p-6">
             <div className="text-4xl font-bold text-[#D4AF37]">+500</div>
             <div className="text-gray-300 mt-2">Professionnels placés avec succès</div>
