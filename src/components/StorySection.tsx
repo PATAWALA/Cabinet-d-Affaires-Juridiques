@@ -12,9 +12,9 @@ const alumni = [
 export default function StorySection() {
   return (
     <section className="py-24 lg:py-32 px-4 bg-[#0B0F19]">
-      <div className="max-w-6xl mx-auto space-y-16 text-center">
+      <div className="max-w-6xl mx-auto space-y-16">
         {/* Portrait + citation */}
-        <div className="flex flex-col items-center space-y-8">
+        <div className="flex flex-col items-center space-y-8 text-center">
           <div className="relative">
             <div className="rounded-xl overflow-hidden border-2 border-[#D4AF37]/30 shadow-[0_0_30px_rgba(212,175,55,0.15)] w-64 sm:w-80">
               <Image
@@ -37,8 +37,8 @@ export default function StorySection() {
           </h2>
         </div>
 
-        {/* Texte narratif */}
-        <div className="text-gray-300 text-lg leading-loose space-y-6 max-w-4xl mx-auto">
+        {/* Texte narratif – aligné à gauche */}
+        <div className="text-gray-300 text-lg leading-loose space-y-6 max-w-4xl mx-auto text-left">
           <p>
             <span className="text-[#D4AF37] font-semibold">Dr Lobé</span> a bâti{" "}
             <strong>LA PRATIQUE DU DROIT</strong> pour combler le vide entre l’université et le monde professionnel.
@@ -64,8 +64,8 @@ export default function StorySection() {
           </p>
         </div>
 
-        {/* Chiffres marquants – maintenant sur toute la largeur avec plus d’espace */}
-        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        {/* Chiffres marquants – centrés en grille */}
+        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto text-center">
           <div className="bg-[#0f172a] border border-[#1E293B] rounded-xl p-6">
             <div className="text-4xl font-bold text-[#D4AF37]">+500</div>
             <div className="text-gray-300 mt-2">Professionnels placés avec succès</div>
