@@ -7,7 +7,6 @@ export default function Hero() {
   const [timeLeft, setTimeLeft] = useState("");
 
   useEffect(() => {
-    // Date limite : 26 août 2026 à minuit
     const deadline = new Date("2026-08-26T23:59:59").getTime();
     const interval = setInterval(() => {
       const now = Date.now();
@@ -27,37 +26,39 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 pt-24 pb-32 overflow-hidden">
+    <section className="relative min-h-screen flex items-center px-4 pt-24 pb-32 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a] via-[#0B0F19] to-[#0B0F19] -z-10" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-[#D4AF37]/10 rounded-full blur-3xl" />
 
-      <div className="space-y-8 max-w-3xl mx-auto select-text">
-        {/* Urgence */}
-        <div className="inline-flex items-center gap-2 bg-red-900/40 border border-red-500/30 rounded-full px-4 py-1.5 text-sm text-red-300 font-semibold animate-pulse">
-          <Clock className="w-4 h-4" />
-          Inscriptions fermées le 26 août à minuit
+      <div className="w-full max-w-3xl mx-auto space-y-8 select-text">
+        {/* Badge urgence – centré */}
+        <div className="text-center">
+          <div className="inline-flex items-center gap-2 bg-red-900/40 border border-red-500/30 rounded-full px-4 py-1.5 text-sm text-red-300 font-semibold animate-pulse">
+            <Clock className="w-4 h-4" />
+            Inscriptions fermées le 26 août à minuit
+          </div>
         </div>
 
-        {/* Compte à rebours */}
-        <div className="text-4xl md:text-5xl font-bold text-[#D4AF37] font-heading tracking-wider select-all">
+        {/* Compte à rebours – centré */}
+        <div className="text-center text-4xl md:text-5xl font-bold text-[#D4AF37] font-heading tracking-wider select-all">
           {timeLeft}
         </div>
 
-        {/* Accroche principale */}
-        <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold leading-tight text-white select-text">
+        {/* Titre – aligné à gauche */}
+        <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold leading-tight text-white text-left">
           Votre diplôme ne suffit pas.
           <br />
           <span className="text-[#D4AF37]">La pratique, oui.</span>
         </h1>
 
-        {/* Sous-titre clair */}
-        <p className="text-lg md:text-xl text-gray-300 max-w-xl mx-auto select-text">
+        {/* Sous‑titre – aligné à gauche */}
+        <p className="text-lg md:text-xl text-gray-300 text-left max-w-2xl">
           Obtenez une Certification Internationale en Pratique Juridique ou Immobilière
           et accédez enfin aux postes que vous méritez.
         </p>
 
-        {/* Preuve sociale condensée */}
-        <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-400 select-text">
+        {/* Preuve sociale – alignée à gauche */}
+        <div className="flex flex-wrap gap-6 text-sm text-gray-400 text-left">
           <div className="flex items-center gap-2">
             <Users className="w-4 h-4 text-[#D4AF37]" />+500 carrières transformées
           </div>
@@ -67,8 +68,8 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* CTA */}
-        <div>
+        {/* CTA – centré pour l'impact */}
+        <div className="text-center">
           <a
             href="#inscription"
             className="inline-flex items-center gap-3 bg-[#D4AF37] hover:bg-[#C5A028] text-[#0B0F19] font-bold px-10 py-5 rounded-full text-xl transition-transform hover:scale-105 shadow-xl shadow-[#D4AF37]/20"
