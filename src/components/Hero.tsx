@@ -30,17 +30,15 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a] via-[#0B0F19] to-[#0B0F19] -z-10" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-[#D4AF37]/10 rounded-full blur-3xl" />
 
-      <div className="w-full max-w-3xl mx-auto space-y-12 select-text text-left">
-        {/* Badge urgence – toujours centré car purement graphique */}
-        <div className="flex justify-center">
-          <div className="inline-flex items-center gap-2 bg-red-900/40 border border-red-500/30 rounded-full px-4 py-1.5 text-sm text-red-300 font-semibold animate-pulse">
-            <Clock className="w-4 h-4" />
-            Inscriptions fermées le 26 août à minuit
-          </div>
+      <div className="w-full max-w-3xl mx-auto space-y-10 md:space-y-12 text-center select-text">
+        {/* Badge urgence */}
+        <div className="inline-flex items-center gap-2 bg-red-900/40 border border-red-500/30 rounded-full px-4 py-1.5 text-sm text-red-300 font-semibold animate-pulse mx-auto">
+          <Clock className="w-4 h-4" />
+          Inscriptions fermées le 26 août à minuit
         </div>
 
-        {/* Compte à rebours – comme un élément visuel centré */}
-        <div className="text-center text-4xl md:text-5xl font-bold text-[#D4AF37] font-heading tracking-wider select-all">
+        {/* Compte à rebours */}
+        <div className="text-4xl md:text-5xl font-bold text-[#D4AF37] font-heading tracking-wider select-all">
           {timeLeft}
         </div>
 
@@ -51,14 +49,14 @@ export default function Hero() {
           <span className="text-[#D4AF37]">La pratique, oui.</span>
         </h1>
 
-        {/* Sous-titre */}
-        <p className="text-lg md:text-xl text-gray-300 max-w-2xl">
+        {/* Sous‑titre */}
+        <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
           Obtenez une Certification Internationale en Pratique Juridique ou Immobilière
           et accédez enfin aux postes que vous méritez.
         </p>
 
         {/* Preuve sociale */}
-        <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm text-gray-400">
+        <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm text-gray-400">
           <div className="flex items-center gap-2">
             <Users className="w-4 h-4 text-[#D4AF37]" />+500 carrières transformées
           </div>
@@ -68,7 +66,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* CTA aligné à gauche */}
+        {/* CTA */}
         <div>
           <a
             href="#inscription"
