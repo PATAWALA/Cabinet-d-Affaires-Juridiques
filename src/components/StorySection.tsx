@@ -37,7 +37,7 @@ export default function StorySection() {
           </h2>
         </div>
 
-        {/* Texte narratif – centré */}
+        {/* Texte narratif */}
         <div className="text-gray-300 text-lg leading-loose space-y-6 max-w-3xl mx-auto">
           <p>
             <span className="text-[#D4AF37] font-semibold">Dr Lobé</span> a bâti{" "}
@@ -64,7 +64,7 @@ export default function StorySection() {
           </p>
         </div>
 
-        {/* Chiffres marquants – centrés */}
+        {/* Chiffres marquants */}
         <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
           <div className="bg-[#0f172a] border border-[#1E293B] rounded-xl p-6">
             <div className="text-4xl font-bold text-[#D4AF37]">+500</div>

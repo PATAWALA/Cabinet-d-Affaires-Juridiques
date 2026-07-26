@@ -30,7 +30,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a] via-[#0B0F19] to-[#0B0F19] -z-10" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-[#D4AF37]/10 rounded-full blur-3xl" />
 
-      <div className="w-full max-w-3xl mx-auto space-y-10 md:space-y-12 text-center select-text">
+      <div className="w-full max-w-3xl mx-auto space-y-10 md:space-y-14 text-center select-text">
         {/* Badge urgence */}
         <div className="inline-flex items-center gap-2 bg-red-900/40 border border-red-500/30 rounded-full px-4 py-1.5 text-sm text-red-300 font-semibold animate-pulse mx-auto">
           <Clock className="w-4 h-4" />
@@ -49,7 +49,7 @@ export default function Hero() {
           <span className="text-[#D4AF37]">La pratique, oui.</span>
         </h1>
 
-        {/* Sous‑titre */}
+        {/* Sous-titre */}
         <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
           Obtenez une Certification Internationale en Pratique Juridique ou Immobilière
           et accédez enfin aux postes que vous méritez.
