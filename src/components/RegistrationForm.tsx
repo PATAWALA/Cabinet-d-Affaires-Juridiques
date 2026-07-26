@@ -148,7 +148,7 @@ export default function RegistrationForm({
     <form
       id="inscription"
       onSubmit={handleSubmit}
-      className="max-w-3xl mx-auto bg-[#0f172a] border border-[#1E293B] rounded-2xl p-8 space-y-6"
+      className="max-w-3xl mx-auto bg-[#0f172a] border border-[#1E293B] rounded-2xl p-4 sm:p-8 space-y-6"
     >
       <div className="text-center">
         <h3 className="font-heading text-2xl font-bold text-white">
@@ -197,19 +197,19 @@ export default function RegistrationForm({
         <div>
           <label className="block text-sm text-gray-300 mb-1">Numéro WhatsApp *</label>
           <div className="flex items-stretch bg-[#0B0F19] border border-[#1E293B] rounded-lg overflow-hidden focus-within:border-[#D4AF37]">
-            <div className="relative flex items-center border-r border-[#1E293B] min-w-0">
+            <div className="relative flex items-center border-r border-[#1E293B] w-16 sm:w-20 flex-shrink-0">
               <select
                 value={countryCode}
                 onChange={(e) => setCountryCode(e.target.value)}
-                className="appearance-none bg-transparent text-white pl-3 pr-8 py-2 text-sm focus:outline-none cursor-pointer max-w-[140px] truncate"
+                className="appearance-none bg-transparent text-white pl-2 pr-6 py-2 text-sm focus:outline-none cursor-pointer w-full truncate"
               >
                 {countries.map((country) => (
                   <option key={country.code} value={country.code} className="text-gray-900">
-                    {country.flag} {country.name}
+                    {country.flag} {country.code}
                   </option>
                 ))}
               </select>
-              <ChevronDown className="absolute right-1.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+              <ChevronDown className="absolute right-1 top-1/2 -translate-y-1/2 w-3 h-3 text-gray-400 pointer-events-none" />
             </div>
             <input
               name="whatsapp"
@@ -217,7 +217,7 @@ export default function RegistrationForm({
               value={form.whatsapp}
               onChange={handleChange}
               placeholder="07 57 27 96 76"
-              className="flex-1 min-w-0 bg-transparent px-4 py-2 text-white placeholder-gray-500 focus:outline-none"
+              className="flex-1 min-w-0 bg-transparent px-3 py-2 text-white placeholder-gray-500 focus:outline-none"
             />
           </div>
           <p className="text-xs text-gray-500 mt-1">
@@ -280,7 +280,7 @@ export default function RegistrationForm({
       </fieldset>
 
       {/* BLOC BOURSE MIS EN AVANT */}
-      <div className="bg-[#D4AF37]/10 border-2 border-[#D4AF37] rounded-2xl p-5 space-y-4">
+      <div className="bg-[#D4AF37]/10 border-2 border-[#D4AF37] rounded-2xl p-4 sm:p-5 space-y-4">
         <div className="flex items-center gap-3">
           <Award className="w-6 h-6 text-[#D4AF37]" />
           <div>
