@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowDown, Award, Clock, ShieldCheck, Star, Users } from "lucide-react";
+import { ArrowDown, Award, Clock, Users, Star } from "lucide-react";
 
 export default function Hero() {
   const [timeLeft, setTimeLeft] = useState("");
@@ -30,65 +30,49 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a] via-[#0B0F19] to-[#0B0F19] -z-10" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-[#D4AF37]/10 rounded-full blur-3xl" />
 
-      <div className="space-y-6 max-w-4xl mx-auto">
+      <div className="space-y-8 max-w-3xl mx-auto">
         {/* Urgence */}
-        <div className="inline-flex items-center gap-2 bg-red-900/40 border border-red-500/30 rounded-full px-5 py-2 text-sm text-red-300 font-semibold animate-pulse">
+        <div className="inline-flex items-center gap-2 bg-red-900/40 border border-red-500/30 rounded-full px-4 py-1.5 text-sm text-red-300 font-semibold animate-pulse">
           <Clock className="w-4 h-4" />
-          Plus que quelques jours – Inscriptions closes le 25 Juillet à minuit
+          Inscriptions fermées le 25 Juillet à minuit
         </div>
 
         {/* Compte à rebours */}
-        <div className="mt-4 text-3xl md:text-4xl font-bold text-[#D4AF37] font-heading">
+        <div className="text-4xl md:text-5xl font-bold text-[#D4AF37] font-heading tracking-wider">
           {timeLeft}
         </div>
 
-        {/* Autorité */}
-        <div className="inline-flex items-center gap-2 bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded-full px-5 py-2 text-sm text-[#D4AF37] font-medium">
-          <Award className="w-4 h-4" />
-          Cabinet d’Affaires Juridiques – Dr Lobé
-        </div>
-
-        {/* Accroche choc */}
+        {/* Accroche principale */}
         <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold leading-tight text-white">
-          Votre diplôme en Droit ou en Immobilier ne vaut rien sans la pratique.
+          Votre diplôme ne suffit pas.
+          <br />
+          <span className="text-[#D4AF37]">La pratique, oui.</span>
         </h1>
 
-        {/* Storytelling */}
-        <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
-          <span className="text-[#D4AF37] font-semibold">
-            “Pendant 15 ans, j’ai vu des talents mourir derrière des cabines téléphoniques.”
-          </span>
-          <br />
-          Aujourd’hui, le Dr Lobé vous ouvre la porte qui transforme un diplômé en professionnel recherché.
+        {/* Sous-titre clair */}
+        <p className="text-lg md:text-xl text-gray-300 max-w-xl mx-auto">
+          Obtenez une Certification Internationale en Pratique Juridique ou Immobilière
+          et accédez enfin aux postes que vous méritez.
         </p>
 
-        {/* Promesse */}
-        <p className="text-base text-gray-400 max-w-xl mx-auto">
-          Obtenez une{" "}
-          <strong className="text-white">Certification Internationale en Pratique Juridique ou Immobilière</strong>{" "}
-          et prouvez enfin ce que vous valez.
-          <br />
-          Bourse <strong className="text-[#D4AF37]">Mamadou TOURÉ</strong> – Places limitées pour les plus déterminés.
-        </p>
-
-        {/* Preuve sociale */}
-        <div className="flex flex-wrap justify-center gap-6 pt-4 text-sm text-gray-400">
+        {/* Preuve sociale condensée */}
+        <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-400">
           <div className="flex items-center gap-2">
-            <Users className="w-4 h-4 text-[#D4AF37]" />+500 carrières métamorphosées
+            <Users className="w-4 h-4 text-[#D4AF37]" />+500 carrières transformées
           </div>
           <div className="flex items-center gap-2">
             <Star className="w-4 h-4 text-[#D4AF37]" />
-            Anciens auditeurs devenus Magistrats, Avocats, Notaires
+            Certification reconnue internationalement
           </div>
         </div>
 
-        {/* CTA principal */}
-        <div className="pt-8">
+        {/* CTA */}
+        <div>
           <a
             href="#inscription"
             className="inline-flex items-center gap-3 bg-[#D4AF37] hover:bg-[#C5A028] text-[#0B0F19] font-bold px-10 py-5 rounded-full text-xl transition-transform hover:scale-105 shadow-xl shadow-[#D4AF37]/20"
           >
-            Je veux débloquer ma carrière – Je m’inscris
+            Je m’inscris et j’obtiens ma bourse
             <ArrowDown className="w-5 h-5" />
           </a>
         </div>
