@@ -71,6 +71,21 @@ export default function RegistrationForm({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  // Nettoie le numéro local : supprime l'indicatif et le zéro initial
+  const cleanLocalNumber = (raw: string, code: string) => {
+    let digits = raw.replace(/\D/g, "");
+    // Supprimer le code pays s'il est présent au début
+    const codeDigits = code.replace(/\D/g, "");
+    if (digits.startsWith(codeDigits)) {
+      digits = digits.slice(codeDigits.length);
+    }
+    // Supprimer le 0 initial si présent
+    if (digits.startsWith("0")) {
+      digits = digits.slice(1);
+    }
+    return digits;
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
@@ -90,11 +105,21 @@ export default function RegistrationForm({
         }
       }
       if (name === "whatsapp") {
-        const cleaned = value.replace(/\D/g, "");
+        const cleaned = cleanLocalNumber(value, countryCode);
         return { ...prev, whatsapp: cleaned };
       }
       return { ...prev, [name]: value };
     });
+  };
+
+  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newCode = e.target.value;
+    setCountryCode(newCode);
+    // Re-nettoyer le numéro local avec le nouveau code
+    setForm((prev) => ({
+      ...prev,
+      whatsapp: cleanLocalNumber(prev.whatsapp, newCode),
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -196,33 +221,37 @@ export default function RegistrationForm({
         </div>
         <div>
           <label className="block text-sm text-gray-300 mb-1">Numéro WhatsApp *</label>
-          <div className="flex items-stretch bg-[#0B0F19] border border-[#1E293B] rounded-lg overflow-hidden focus-within:border-[#D4AF37]">
-            <div className="relative flex items-center border-r border-[#1E293B] w-16 sm:w-20 flex-shrink-0">
-              <select
-                value={countryCode}
-                onChange={(e) => setCountryCode(e.target.value)}
-                className="appearance-none bg-transparent text-white pl-2 pr-6 py-2 text-sm focus:outline-none cursor-pointer w-full truncate"
-              >
-                {countries.map((country) => (
-                  <option key={country.code} value={country.code} className="text-gray-900">
-                    {country.flag} {country.code}
-                  </option>
-                ))}
-              </select>
-              <ChevronDown className="absolute right-1 top-1/2 -translate-y-1/2 w-3 h-3 text-gray-400 pointer-events-none" />
-            </div>
+
+          {/* Sélecteur de pays */}
+          <div className="relative mb-2">
+            <select
+              value={countryCode}
+              onChange={handleCountryChange}
+              className="w-full bg-[#0B0F19] border border-[#1E293B] rounded-lg pl-3 pr-10 py-2.5 text-white text-sm appearance-none cursor-pointer focus:outline-none focus:border-[#D4AF37]"
+            >
+              {countries.map((country) => (
+                <option key={country.code} value={country.code} className="text-gray-900">
+                  {country.flag}  {country.name} ({country.code})
+                </option>
+              ))}
+            </select>
+            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+          </div>
+
+          {/* Champ numéro local */}
+          <div>
             <input
               name="whatsapp"
               required
               value={form.whatsapp}
               onChange={handleChange}
               placeholder="07 57 27 96 76"
-              className="flex-1 min-w-0 bg-transparent px-3 py-2 text-white placeholder-gray-500 focus:outline-none"
+              className="w-full bg-[#0B0F19] border border-[#1E293B] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#D4AF37]"
             />
+            <p className="text-xs text-gray-500 mt-1">
+              Saisissez votre numéro sans l'indicatif. Exemple : 07 57 27 96 76
+            </p>
           </div>
-          <p className="text-xs text-gray-500 mt-1">
-            Choisissez votre pays, puis saisissez votre numéro local.
-          </p>
         </div>
       </div>
 
